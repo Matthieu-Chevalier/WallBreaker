@@ -21,5 +21,10 @@ namespace Objects.Dessins
             Pen pen = new Pen(Color.Red, 3);
             g.DrawRectangle(pen, raquette.PositionX, raquette.PositionY, raquette.Largeur, raquette.Hauteur);
         }
+        public void DessinerBalle(Balle balle, Graphics g)
+        {
+            Pen pen = new Pen(Color.Black, 3);
+            g.DrawEllipse(pen, balle.BalleX, balle.BalleY,balle.BalleSize, balle.BalleSize);
+        }
     }
 }
