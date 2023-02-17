@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Objets
+namespace Objects.Objets
 {
     public class Raquette
     {
