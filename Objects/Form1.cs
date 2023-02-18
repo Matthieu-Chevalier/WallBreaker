@@ -25,7 +25,7 @@ namespace Objects
             int raquettePosY = this.ClientSize.Height * 4 / 5 - 20; // A un cinquième de la hauteur à partir du bas
 
             raquette = new Raquette(raquettePosX, raquettePosY, 50, 100);
-             dessin = new Dessin(CreateGraphics());
+            dessin = new Dessin(CreateGraphics());
 
 
         }
@@ -38,7 +38,6 @@ namespace Objects
 
         private void Form1_Load(object sender, EventArgs e)
         {
-           // dessin.DessinerRaquette(raquette);
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

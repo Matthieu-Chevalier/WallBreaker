@@ -55,6 +55,7 @@
     </Compile>
     <Compile Include="Objets\Balle.cs" />
     <Compile Include="Objets\Raquette.cs" />
+    <Compile Include="Observer\IObserver.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
