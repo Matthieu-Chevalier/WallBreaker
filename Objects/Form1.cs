@@ -17,15 +17,19 @@ namespace Objects
         private const int VITESSE = 10;
         public Dessin dessin;
         public Raquette raquette;
+        public ZoneDeJeu ZoneDeJeu;
+        public Balle Balle;
         public Form1()
         {
             InitializeComponent();
             DoubleBuffered= true;
             int raquettePosX = this.ClientSize.Width / 2 - 50; // Centré horizontalement
             int raquettePosY = this.ClientSize.Height * 4 / 5 - 20; // A un cinquième de la hauteur à partir du bas
-
+            ZoneDeJeu = new ZoneDeJeu(10, ClientSize.Height - 10, 10, ClientSize.Width - 10);
             raquette = new Raquette(raquettePosX, raquettePosY, 50, 100);
+            Balle = new Balle(raquettePosX+50, raquettePosY-15, 0, 0, 15);
             dessin = new Dessin(CreateGraphics());
+
 
 
         }
@@ -34,6 +38,8 @@ namespace Objects
         {
             Graphics g = e.Graphics;
             dessin.DessinerRaquette(raquette, g);
+            dessin.DessinerZoneDeJeu(ZoneDeJeu, g);
+            dessin.DessinerBalle(Balle, g);
         }
 
         private void Form1_Load(object sender, EventArgs e)
