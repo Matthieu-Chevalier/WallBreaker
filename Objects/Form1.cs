@@ -27,10 +27,10 @@ namespace Objects
             int raquettePosY = this.ClientSize.Height * 4 / 5 - 20; // A un cinquième de la hauteur à partir du bas
             ZoneDeJeu = new ZoneDeJeu(10, ClientSize.Height - 10, 10, ClientSize.Width - 10);
             raquette = new Raquette(raquettePosX, raquettePosY, 50, 100);
-            Balle = new Balle(raquettePosX+50, raquettePosY-15, 0, 0, 15);
+            Balle = new Balle(raquettePosX+50, raquettePosY-15, 10, -10, 15);
             dessin = new Dessin(CreateGraphics());
 
-
+            gameTimer.Start();
 
         }
 
@@ -48,7 +48,9 @@ namespace Objects
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Left && raquette.PositionX>0)
+            //TODO à déplacer dans la couche "Physique"
+            // Physique.DeplacerRaquette(e.KeyCode)
+            if (e.KeyCode == Keys.Left && raquette.PositionX>0)
             {
                 raquette.DeplacerRaquette(-VITESSE);
             }
@@ -56,6 +58,35 @@ namespace Objects
             {
                 raquette.DeplacerRaquette(VITESSE);
             }
+            Invalidate();
+        }
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+            //TODO à déplacer dans la couche "Physique"
+            // Mettre à jour la position de la balle
+            Balle.BalleX += Balle.BalleDX;
+            Balle.BalleY += Balle.BalleDY;
+
+
+            // Mettre à jour la direction de la balle si elle entre en collision avec le mur
+            if (Balle.BalleX < 0 || Balle.BalleX > ClientSize.Width)
+            {
+                Balle.BalleDX = -Balle.BalleDX;
+            }
+            if (Balle.BalleY < 0)
+            {
+                Balle.BalleDY = -Balle.BalleDY;
+            }
+
+            // Mettre à jour la direction de la balle si elle entre en collision avec la raquette
+            if (Balle.BalleY + Balle.BalleDY > raquette.PositionY
+                && Balle.BalleX + Balle.BalleDX > raquette.PositionX 
+                && Balle.BalleX + Balle.BalleDY < raquette.PositionX + raquette.Largeur)
+            {
+                Balle.BalleDY = -Balle.BalleDY;
+            }
+
+            // Mettre à jour l'affichage
             Invalidate();
         }
     }
