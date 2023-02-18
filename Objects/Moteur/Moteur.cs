@@ -34,32 +34,18 @@ namespace Objects.Observer
 
         public void KeyBoardReaction(KeyEventArgs e)
         {
-
-
-            if (e.KeyCode == Keys.Left && raquette.PositionX > zoneDeJeu.MurGauche)
+            if (e.KeyCode == Keys.Left)
             {
-                raquette.DeplacerRaquette(-VITESSE);
+                raquette.DeplacerRaquette(-VITESSE, zoneDeJeu.MurGauche,zoneDeJeu.MurDroit);
             }
-            if (e.KeyCode == Keys.Right && (raquette.PositionX + raquette.Largeur) < zoneDeJeu.MurDroit)
+            if (e.KeyCode == Keys.Right)
             {
-                raquette.DeplacerRaquette(VITESSE);
+                raquette.DeplacerRaquette(VITESSE, zoneDeJeu.MurGauche, zoneDeJeu.MurDroit);
             }
             if (e.KeyCode == Keys.Space)
             {
                 IsPaused = !IsPaused;
             }
-        }
-        public void Notify(object sender, string eventName, EventArgs eventArgs)
-        {
-            switch (eventArgs.GetType())
-            {
-                case var e when e == typeof(KeyEventArgs):
-                    KeyBoardReaction(eventArgs as KeyEventArgs);
-                    break;
-
-                default: break;
-            }
-            throw new NotImplementedException();
         }
 
         public void Run()

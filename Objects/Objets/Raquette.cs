@@ -8,25 +8,29 @@ namespace Objects.Objets
 {
     public class Raquette
     {
+        private int _positionX;
+        private int _positionY;
+        private int _hauteur;
+        private int _largeur;
+        public int PositionX { get { return _positionX; }  }
+        public int PositionY { get { return _positionY; }  } // On peut envisager plus tard de modifier la position de la raquette suite à un Malus, mais pas pour l'instant
+        public int Hauteur { get { return _hauteur; }  } // La hauteur de la raquette ne changera jamais
+        public int Largeur { get { return _largeur; } }
+    
+
         public Raquette(int positionX, int positionY, int hauteur, int largeur)
         {
-            PositionX = positionX;
-            PositionY = positionY;
-            Hauteur = hauteur;
-            Largeur = largeur;
+            _positionX = positionX;
+            _positionY = positionY;
+            _hauteur = hauteur;
+            _largeur = largeur;
         }
-
-        public int PositionX { get; set; }
-        public int PositionY { get;  } // On peut envisager plus tard de modifier la hauteur de la raquette suite à un Malus, mais pas pour l'instant
-        public int Hauteur { get;  } // La hauteur de la raquette ne changera jamais
-        public int Largeur { get; set; }
-
-         
-        public void DeplacerRaquette(int vitesse)
+        public void DeplacerRaquette(int vitesse, int bordGauche, int bordDroit)
         {
-            PositionX += vitesse;
+            if(_positionX > bordGauche || _positionX+_largeur<bordDroit)
+            {
+                _positionX += vitesse;
+            }
         }
-        
-
     }
 }
