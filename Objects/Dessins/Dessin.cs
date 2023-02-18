@@ -14,6 +14,7 @@ namespace Objects.Dessins
         public Dessin(Graphics modeleGraphique)
         {
             ModeleGraphique = modeleGraphique;
+            
         }
 
         public void DessinerRaquette(Raquette raquette, Graphics g)
@@ -25,6 +26,14 @@ namespace Objects.Dessins
         {
             Pen pen = new Pen(Color.Black, 3);
             g.DrawEllipse(pen, balle.BalleX, balle.BalleY,balle.BalleSize, balle.BalleSize);
+        }
+        public void DessinerZoneDeJeu(ZoneDeJeu zoneDeJeu, Graphics g)
+        {
+            Pen pen = new Pen(Color.Black, 4);
+            //Deux approches: soit on dessine ligne par ligne, soit un dessine un rectangle directement
+            int largeur = (zoneDeJeu.MurDroit - zoneDeJeu.MurGauche);
+            int hauteur = (zoneDeJeu.MurBas - zoneDeJeu.MurHaut);
+            g.DrawRectangle(pen, zoneDeJeu.MurGauche, zoneDeJeu.MurHaut, largeur, hauteur);
         }
     }
 }
