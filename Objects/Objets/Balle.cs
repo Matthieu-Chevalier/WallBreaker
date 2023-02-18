@@ -31,13 +31,7 @@ namespace Objects.Objets
             BalleX += BalleDX; 
             BalleY += BalleDY;
         }
-        private void ChangerDX(int? coef)
-        {
-            if (coef == null)
-            {
-
-            }
-        }
+       
     }
     
 }

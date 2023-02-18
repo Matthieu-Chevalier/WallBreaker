@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Objects.Observer
 {
-    public interface IObservable
+    public interface IMediator
     {
+        void Notify(object sender, string eventName, EventArgs eventArgs);
     }
 }

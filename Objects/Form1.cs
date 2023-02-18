@@ -1,5 +1,6 @@
 ﻿using Objects.Dessins;
 using Objects.Objets;
+using Objects.Observer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,11 +15,12 @@ namespace Objects
 {
     public partial class Form1 : Form
     {
-        private const int VITESSE = 10;
+        
         public Dessin dessin;
         public Raquette raquette;
         public ZoneDeJeu ZoneDeJeu;
         public Balle Balle;
+        public Moteur Moteur;
         public Form1()
         {
             InitializeComponent();
@@ -29,7 +31,7 @@ namespace Objects
             raquette = new Raquette(raquettePosX, raquettePosY, 50, 100);
             Balle = new Balle(raquettePosX+50, raquettePosY-15, 10, -10, 15);
             dessin = new Dessin(CreateGraphics());
-
+            Moteur = new Moteur(Balle, raquette, ZoneDeJeu);
             gameTimer.Start();
 
         }
@@ -48,43 +50,14 @@ namespace Objects
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            //TODO à déplacer dans la couche "Physique"
-            // Physique.DeplacerRaquette(e.KeyCode)
-            if (e.KeyCode == Keys.Left && raquette.PositionX>0)
-            {
-                raquette.DeplacerRaquette(-VITESSE);
-            }
-            if(e.KeyCode == Keys.Right && (raquette.PositionX+raquette.Largeur)<this.ClientSize.Width)
-            {
-                raquette.DeplacerRaquette(VITESSE);
-            }
+            Moteur.KeyBoardReaction( e);
+            
             Invalidate();
         }
         private void gameTimer_Tick(object sender, EventArgs e)
         {
-            //TODO à déplacer dans la couche "Physique"
-            // Mettre à jour la position de la balle
-            Balle.BalleX += Balle.BalleDX;
-            Balle.BalleY += Balle.BalleDY;
-
-
-            // Mettre à jour la direction de la balle si elle entre en collision avec le mur
-            if (Balle.BalleX < 0 || Balle.BalleX > ClientSize.Width)
-            {
-                Balle.BalleDX = -Balle.BalleDX;
-            }
-            if (Balle.BalleY < 0)
-            {
-                Balle.BalleDY = -Balle.BalleDY;
-            }
-
-            // Mettre à jour la direction de la balle si elle entre en collision avec la raquette
-            if (Balle.BalleY + Balle.BalleDY > raquette.PositionY
-                && Balle.BalleX + Balle.BalleDX > raquette.PositionX 
-                && Balle.BalleX + Balle.BalleDY < raquette.PositionX + raquette.Largeur)
-            {
-                Balle.BalleDY = -Balle.BalleDY;
-            }
+            Moteur.Run();
+            
 
             // Mettre à jour l'affichage
             Invalidate();
