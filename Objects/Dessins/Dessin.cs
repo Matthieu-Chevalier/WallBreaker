@@ -1,4 +1,5 @@
-﻿using Objects.Objets;
+﻿using Objects.Moteur;
+using Objects.Objets;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,11 +11,11 @@ namespace Objects.Dessins
 {
     public class Dessin
     {
-        public Graphics ModeleGraphique { get; set; }
+        public Graphics ModeleGraphique;
         public Dessin(Graphics modeleGraphique)
         {
             ModeleGraphique = modeleGraphique;
-            
+                      
         }
 
         public void DessinerRaquette(Raquette raquette, Graphics g)
@@ -34,6 +35,15 @@ namespace Objects.Dessins
             int largeur = (zoneDeJeu.MurDroit - zoneDeJeu.MurGauche);
             int hauteur = (zoneDeJeu.MurBas - zoneDeJeu.MurHaut);
             g.DrawRectangle(pen, zoneDeJeu.MurGauche, zoneDeJeu.MurHaut, largeur, hauteur);
+        }
+        public void DessinerBrique(Brique brique, Graphics g)
+        {
+            Brush brush = new SolidBrush(Color.FromArgb(200, Color.Black));
+            
+            Pen pen = new Pen(Color.White, 1);
+            g.FillRectangle(brush, brique.GetRectangle());
+            g.DrawRectangle(pen, brique.GetRectangle());
+            
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Objects.Moteurs;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -79,6 +80,21 @@ namespace Objects.Objets
                 return true;
             }
             else return false;
+        }
+        //On assimile la balle à un rectangle pour faciliter la gestion des collisions
+        public Rectangle GetBallRectangle()
+        {
+            return new Rectangle(new Point(BalleX, BalleY), new Size(BalleSize, BalleSize));
+        }
+
+        internal void InverserY()
+        {
+            BalleDY = -BalleDY;
+        }
+
+        internal void InverserX()
+        {
+            BalleDX = -BalleDX;
         }
     }
     

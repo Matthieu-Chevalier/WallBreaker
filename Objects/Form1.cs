@@ -42,6 +42,11 @@ namespace Objects
             dessin.DessinerRaquette(raquette, g);
             dessin.DessinerZoneDeJeu(ZoneDeJeu, g);
             dessin.DessinerBalle(Balle, g);
+            foreach(Brique brique in Moteur.Collisables)
+            {
+
+            dessin.DessinerBrique(brique, g);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
