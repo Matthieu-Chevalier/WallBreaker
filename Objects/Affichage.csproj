@@ -53,11 +53,12 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="Moteurs\Gestionnaire.cs" />
     <Compile Include="Objets\Balle.cs" />
     <Compile Include="Objets\Raquette.cs" />
     <Compile Include="Objets\ZoneDeJeu.cs" />
-    <Compile Include="Moteur\IMediator.cs" />
-    <Compile Include="Moteur\Moteur.cs" />
+    <Compile Include="Moteurs\IMediator.cs" />
+    <Compile Include="Moteurs\Mouvement.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

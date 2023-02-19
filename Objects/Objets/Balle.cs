@@ -26,10 +26,20 @@ namespace Objects.Objets
             BalleSize = balleSize;
         }
 
-        public void DeplacerBaller()
+        public void DeplacerBalle(int Dx, int Dy)
         {
+            BalleDX=Dx; BalleDY=Dy;
             BalleX += BalleDX; 
             BalleY += BalleDY;
+        }
+
+        public void ChangeDirection(int direction)
+        {
+
+        }
+        public int GetPositionY()
+        {
+            return BalleY;
         }
        
     }

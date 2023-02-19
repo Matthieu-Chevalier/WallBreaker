@@ -20,7 +20,7 @@ namespace Objects
         public Raquette raquette;
         public ZoneDeJeu ZoneDeJeu;
         public Balle Balle;
-        public Moteur Moteur;
+        public Mouvement Moteur;
         public Form1()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace Objects
             raquette = new Raquette(raquettePosX, raquettePosY, 50, 100);
             Balle = new Balle(raquettePosX+50, raquettePosY-15, 10, -10, 15);
             dessin = new Dessin(CreateGraphics());
-            Moteur = new Moteur(Balle, raquette, ZoneDeJeu);
+            Moteur = new Mouvement(Balle, raquette, ZoneDeJeu);
             gameTimer.Start();
 
         }
