@@ -38,7 +38,7 @@ namespace Objects.Objets
 
         public void DeplacerBalle()
         {
-            if (BalleX<MinX || BalleX>MaxX)
+            if (BalleX<MinX || BalleX+BalleSize>MaxX)
             {
                 BalleDX = -BalleDX;
             }
@@ -72,7 +72,7 @@ namespace Objects.Objets
         }
         private bool CollisionRaquette()
         {
-            if (BalleY+BalleDY > RaquetteY-RaquetteHauteur
+            if (BalleY+BalleSize > RaquetteY
                 && BalleX > RaquetteX
                 && BalleX < RaquetteX+RaquetteLargeur)
             {
