@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Objects.Objets
 {
-    public class Raquette : IContraignable
+    public class Raquette : IContraignable, IObservable
     {
         private int _positionX;
         private int _positionY;
@@ -19,7 +19,7 @@ namespace Objects.Objets
         public int Largeur { get { return _largeur; } }
         private int MinX;
         private int MaxX;
-    
+        private List<IObserver> balles;
 
         public Raquette(int positionX, int positionY, int hauteur, int largeur)
         {
@@ -27,12 +27,15 @@ namespace Objects.Objets
             _positionY = positionY;
             _hauteur = hauteur;
             _largeur = largeur;
+            balles  = new List<IObserver>();
+
         }
         public void DeplacerDroite(int vitesse)
         {
             if(_positionX+_largeur<MaxX)
             {
                 _positionX += vitesse;
+                AvertirObservateurs();
             }
         }
         public void DeplacerGauche(int vitesse)
@@ -40,6 +43,7 @@ namespace Objects.Objets
             if (_positionX>MinX)
             {
                 _positionX -= vitesse;
+                AvertirObservateurs();
             }
         }
 
@@ -47,6 +51,26 @@ namespace Objects.Objets
         {
             MinX = zone.MurGauche;
             MaxX = zone.MurDroit;
+        }
+
+        public void AjouterObservateur(IObserver observateur)
+        {
+            if(observateur.GetType()==typeof(Balle))
+            balles.Add(observateur);
+        }
+
+        public void SupprimerObservateur(IObserver observateur)
+        {
+            if(observateur.GetType() == typeof(Balle))
+            balles.Remove(observateur);
+        }
+
+        public void AvertirObservateurs()
+        {
+            foreach (var item in balles)
+            {
+                item.Actualiser(this);
+            }
         }
     }
 }

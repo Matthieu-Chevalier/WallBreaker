@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Objects.Objets
 {
-    public class Balle : IContraignable
+    public class Balle : IContraignable, IObserver
     {
      
 
@@ -21,6 +21,11 @@ namespace Objects.Objets
         private int MaxY;
         private int MinX;
         private int MinY;
+        private int RaquetteY;
+        private int RaquetteX;
+        private int RaquetteLargeur;
+        private int RaquetteHauteur;
+
 
         public Balle(int balleX, int balleY, int balleDX, int balleDY, int balleSize)
         {
@@ -37,7 +42,8 @@ namespace Objects.Objets
             {
                 BalleDX = -BalleDX;
             }
-            if(BalleY<MinY || BalleY>MaxY) { BalleDY = - BalleDY; }
+            if(BalleY<MinY || BalleY>MaxY || this.CollisionRaquette()) { BalleDY = - BalleDY; }
+            
             BalleX += BalleDX;
             BalleY += BalleDY;
         }
@@ -48,6 +54,31 @@ namespace Objects.Objets
             MinX = zone.MurGauche;
             MaxY = zone.MurBas;
             MinY = zone.MurHaut;
+        }
+
+        public void Actualiser(IObservable observable)
+        {
+            if(observable.GetType() == typeof(Raquette)) {
+            Raquette raquette = (Raquette)observable;
+                RaquetteY = raquette.PositionY;
+                RaquetteX = raquette.PositionX;
+                RaquetteHauteur = raquette.Hauteur;
+                RaquetteLargeur = raquette.Largeur;
+            }else
+            {
+
+            throw new NotImplementedException();
+            }
+        }
+        private bool CollisionRaquette()
+        {
+            if (BalleY+BalleDY > RaquetteY-RaquetteHauteur
+                && BalleX > RaquetteX
+                && BalleX < RaquetteX+RaquetteLargeur)
+            {
+                return true;
+            }
+            else return false;
         }
     }
     

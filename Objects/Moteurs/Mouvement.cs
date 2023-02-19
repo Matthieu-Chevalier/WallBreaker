@@ -27,8 +27,11 @@ namespace Objects.Observer
             this.raquette = raquette;
             this.zoneDeJeu = zoneDeJeu;
             IsPaused = true;
-            balle.ImposerContrainte(zoneDeJeu);
-            raquette.ImposerContrainte(zoneDeJeu);
+            this.balle.ImposerContrainte(zoneDeJeu);
+            this.raquette.ImposerContrainte(zoneDeJeu);
+
+            //Ajouter un observateur:
+            this.raquette.AjouterObservateur(balle);
         }
 
 
