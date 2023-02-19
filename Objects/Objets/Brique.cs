@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objects.Observer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,26 +10,29 @@ namespace Objects.Objets
     public class Brique 
     {
         private int resistance;
+        public const int LARGEUR = 50;
+        public const int HAUTEUR = 50;
+        private Mouvement Mouvement;
+        
 
-        public Brique(int resistance)
+        public Brique(int resistance, Mouvement mvt)
         {
             this.resistance = resistance;
+            Mouvement = mvt;
         }
-        public void DecreaseResistance()
+        public void Affaiblir()
         {
             resistance -= 1;
-            Notify();
+            AvertirMouvement();
         }
-        private void Notify()
+     
+
+        public void AvertirMouvement()
         {
-            if (resistance == 0)
+            if(resistance == 0)
             {
-                //Prévenir de la suppression
+            Mouvement.SupprimerBrique(this);
             }
-           
         }
-
-
-      
     }
 }
