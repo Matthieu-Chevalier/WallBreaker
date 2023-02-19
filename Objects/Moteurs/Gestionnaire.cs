@@ -1,9 +1,5 @@
 ﻿using Objects.Objets;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Objects.Moteur
 {
@@ -11,20 +7,30 @@ namespace Objects.Moteur
     {
         private const int VITESSE = 10; //Vitesse de déplacement de la raquette
 
-        private Balle balle;
-        private Raquette raquette;
-        private ZoneDeJeu zoneDeJeu;
-       
+        private List<Balle> Balles;
+        private List<Raquette> Raquettes;
+        private ZoneDeJeu ZoneDeJeu;
+        private List<Brique> Briques;
+
 
         //private Bonus
         //Private Brique
 
-        public Gestionnaire(Balle balle, Raquette raquette, ZoneDeJeu zoneDeJeu)
+        public Gestionnaire()
         {
-            this.balle = balle;
-            this.raquette = raquette;
-            this.zoneDeJeu = zoneDeJeu;
-           
+            
+        }
+
+        public void AjouterBalle(Balle balle)
+        {
+            Balles.Add(balle);
+        }
+        public void SupprimerBalle(Balle balle)
+        {
+            Balles.Remove(balle);
+            if (Balles.Count == 0)
+            { //Notifier le moteur qu'il n'y a plus de balles
+            }
         }
     }
 }
