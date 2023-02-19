@@ -27,6 +27,8 @@ namespace Objects.Observer
             this.raquette = raquette;
             this.zoneDeJeu = zoneDeJeu;
             IsPaused = true;
+            balle.ImposerContrainte(zoneDeJeu);
+            raquette.ImposerContrainte(zoneDeJeu);
         }
 
 
@@ -35,11 +37,11 @@ namespace Objects.Observer
         {
             if (e.KeyCode == Keys.Left)
             {
-                raquette.DeplacerRaquette(-VITESSE, zoneDeJeu.MurGauche, zoneDeJeu.MurDroit);
+                raquette.DeplacerGauche(VITESSE);
             }
             if (e.KeyCode == Keys.Right)
             {
-                raquette.DeplacerRaquette(VITESSE, zoneDeJeu.MurGauche, zoneDeJeu.MurDroit);
+                raquette.DeplacerDroite(VITESSE);
             }
             if (e.KeyCode == Keys.Space)
             {
@@ -49,38 +51,10 @@ namespace Objects.Observer
 
         public void Run()
         {
-            // Mettre à jour la position de la balle
-            int Dx = balle.BalleDX;
-            int Dy = balle.BalleDY;
-            int pX = balle.BalleX;
-            int pY = balle.BalleY;
+            
 
-
-            // Mettre à jour la direction de la balle si elle entre en collision avec le mur
-            if (pX < zoneDeJeu.MurGauche || pX > zoneDeJeu.MurDroit)
-            {
-                Dx = -Dx;
-            }
-            if (balle.BalleY < 0)
-            {
-                Dy = -Dy;
-            }
-
-            if (balle.GetPositionY() + Dy > raquette.PositionY)
-            {
-                // Mettre à jour la direction de la balle si elle entre en collision avec la raquette
-                if (
-                 pX + Dx > raquette.PositionX
-                && pX + Dx < raquette.PositionX + raquette.Largeur)
-                {
-                    Dy = -Dy;
-                }
-                else // Si la balle passe en dessous de la raquette
-                {
-                    //Fin de partie
-                }
-            }
-            balle.DeplacerBalle(Dx,Dy);
+            
+            balle.DeplacerBalle();
         }
     }
 }

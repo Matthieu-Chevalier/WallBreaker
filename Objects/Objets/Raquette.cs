@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objects.Moteurs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Objects.Objets
 {
-    public class Raquette
+    public class Raquette : IContraignable
     {
         private int _positionX;
         private int _positionY;
@@ -16,6 +17,8 @@ namespace Objects.Objets
         public int PositionY { get { return _positionY; }  } // On peut envisager plus tard de modifier la position de la raquette suite à un Malus, mais pas pour l'instant
         public int Hauteur { get { return _hauteur; }  } // La hauteur de la raquette ne changera jamais
         public int Largeur { get { return _largeur; } }
+        private int MinX;
+        private int MaxX;
     
 
         public Raquette(int positionX, int positionY, int hauteur, int largeur)
@@ -25,12 +28,25 @@ namespace Objects.Objets
             _hauteur = hauteur;
             _largeur = largeur;
         }
-        public void DeplacerRaquette(int vitesse, int bordGauche, int bordDroit)
+        public void DeplacerDroite(int vitesse)
         {
-            if(_positionX > bordGauche || _positionX+_largeur<bordDroit)
+            if(_positionX+_largeur<MaxX)
             {
                 _positionX += vitesse;
             }
+        }
+        public void DeplacerGauche(int vitesse)
+        {
+            if (_positionX>MinX)
+            {
+                _positionX -= vitesse;
+            }
+        }
+
+        public void ImposerContrainte(ZoneDeJeu zone)
+        {
+            MinX = zone.MurGauche;
+            MaxX = zone.MurDroit;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Objects.Moteurs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Objects.Objets
 {
-    public class Balle
+    public class Balle : IContraignable
     {
      
 
@@ -16,6 +17,10 @@ namespace Objects.Objets
         public int BalleDX { get; set;} // Vitesse sur l'axe X
         public int BalleDY { get; set;} // Vitesse sur l'axe Y
         public int BalleSize { get; set;}
+        private int MaxX;
+        private int MaxY;
+        private int MinX;
+        private int MinY;
 
         public Balle(int balleX, int balleY, int balleDX, int balleDY, int balleSize)
         {
@@ -26,22 +31,24 @@ namespace Objects.Objets
             BalleSize = balleSize;
         }
 
-        public void DeplacerBalle(int Dx, int Dy)
+        public void DeplacerBalle()
         {
-            BalleDX=Dx; BalleDY=Dy;
-            BalleX += BalleDX; 
+            if (BalleX<MinX || BalleX>MaxX)
+            {
+                BalleDX = -BalleDX;
+            }
+            if(BalleY<MinY || BalleY>MaxY) { BalleDY = - BalleDY; }
+            BalleX += BalleDX;
             BalleY += BalleDY;
         }
 
-        public void ChangeDirection(int direction)
+        public void ImposerContrainte(ZoneDeJeu zone)
         {
-
+            MaxX = zone.MurDroit;
+            MinX = zone.MurGauche;
+            MaxY = zone.MurBas;
+            MinY = zone.MurHaut;
         }
-        public int GetPositionY()
-        {
-            return BalleY;
-        }
-       
     }
     
 }

@@ -54,6 +54,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Moteurs\Gestionnaire.cs" />
+    <Compile Include="Objets\IContraignable.cs" />
     <Compile Include="Objets\Balle.cs" />
     <Compile Include="Objets\Raquette.cs" />
     <Compile Include="Objets\ZoneDeJeu.cs" />
