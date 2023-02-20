@@ -16,7 +16,6 @@ namespace Objects
     public partial class Form1 : Form
     {
         
-        public Dessin dessin;
         public Raquette raquette;
         public ZoneDeJeu ZoneDeJeu;
         public Balle Balle;
@@ -30,7 +29,7 @@ namespace Objects
             ZoneDeJeu = new ZoneDeJeu(10, ClientSize.Height - 10, 10, ClientSize.Width - 10);
             raquette = new Raquette(raquettePosX, raquettePosY, 50, 100);
             Balle = new Balle(raquettePosX+50, raquettePosY-15, 10, -10, 15);
-            dessin = new Dessin(CreateGraphics());
+           
             Moteur = new Mouvement(Balle, raquette, ZoneDeJeu);
             gameTimer.Start();
 
@@ -39,13 +38,13 @@ namespace Objects
         public void Form1_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-            dessin.DessinerRaquette(raquette, g);
-            dessin.DessinerZoneDeJeu(ZoneDeJeu, g);
-            dessin.DessinerBalle(Balle, g);
+            Dessin.DessinerRaquette(raquette, g);
+            Dessin.DessinerZoneDeJeu(ZoneDeJeu, g);
+            Dessin.DessinerBalle(Balle, g);
             foreach(Brique brique in Moteur.Collisables)
             {
 
-            dessin.DessinerBrique(brique, g);
+            Dessin.DessinerBrique(brique, g);
             }
         }
 
