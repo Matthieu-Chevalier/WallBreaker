@@ -15,10 +15,24 @@ namespace Objects.Moteur
 
         //private Bonus
         //Private Brique
-
-        public Gestionnaire()
+        /// <summary>
+        /// Le gestionnaire pilote la création / suppression des objets
+        /// lors de l'initailisation du jeu il créée la zone de jeu, une première balle et une première raquette
+        /// Il devra implémenter une méthode : Lvl configuration qui se chargera de créer le mur de brique
+        /// 
+        /// Evenements à mettre en place :
+        ///     0 balles -> perdre une vie
+        ///     0 briques -> Niveau suivant
+        ///     0 vie -> GameOver
+        /// </summary>
+        private Gestionnaire()
         {
-            
+            //Création de la zone de jeu:
+            ZoneDeJeu = new ZoneDeJeu(10, 1000, 10,1500);//Zone de jeu à revoir: Elle doit ajuster se position à la fenêtre et empêcher la fenêtre d'être plus petite
+            //Raquette Initialraquette = new Raquette()
+            //Raquettes= new List<Raquette>();
+            //Raquettes.Add(Initialraquette);
+
         }
 
         public void AjouterBalle(Balle balle)
